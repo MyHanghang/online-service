@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="utf-8"/>
+    <title>第二课堂系统</title>
+    <meta name="keywords" content="第二课堂系统"/>
+    <meta name="description" content="第二课堂系统"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <script src="assets/js/ace-extra.min.js"></script>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular/outlogin.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="baseCtrl">
+<div ng-controller="outloginCtrl">
+    <div ng-include="'stu/head.html'" class="navbar navbar-default"
+         id="navbar"></div>
+</div>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#"> <span
+                class="menu-text"></span>
+        </a>
+        <div ng-include="'stu/menu.html'"></div>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        比赛信息
+                        <small><i class="icon-double-angle-right"></i>
+
+                        </small>
+                    </h1>
+                </div>
+                <!-- /.page-header -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div id="timeline-1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                                    <div class="timeline-container">
+                                        <div class="timeline-label">
+												<span class="label label-primary arrowed-in-right label-lg">
+													<b style="font-size: 15px">最新比赛信息</b>
+												</span>
+                                        </div>
+                                        <div class="timeline-items">
+                                            <div class="timeline-item clearfix">
+                                                <div class="timeline-info">
+                                                    <i class="timeline-indicator icon-star btn btn-warning no-hover green"></i>
+                                                </div>
+                                                <div ng-repeat="x in infos">
+                                                    <div class="widget-box transparent">
+                                                        <div class="widget-header widget-header-small">
+                                                            <h5 class="smaller"><strong>{{x.name}}</strong></h5>
+                                                            <span class="widget-toolbar no-border"> <i
+                                                                    class="icon-time bigger-110"></i> {{x.oprtime}}
+																</span> <span class="widget-toolbar"> <a href="#"
+                                                                                                         data-action="reload"> <i
+                                                                class="icon-refresh"></i>
+																</a> <a href="#" data-action="collapse"> <i
+                                                                class="icon-chevron-up"></i>
+																</a>
+																</span>
+                                                        </div>
+                                                        <div class="widget-body">
+                                                            <div class="widget-main">
+                                                                {{x.content}}
+                                                                <div class="space-6"></div>
+                                                                <div class="widget-toolbox clearfix">
+                                                                    <div class="pull-right action-buttons">
+                                                                        <div class="space-4"></div>
+                                                                        <p></p>
+                                                                        <a class="text-danger"><i
+                                                                                class="icon-heart red bigger-125"></i>
+                                                                            联系方式：{{x.memo}}</a>
+                                                                        <div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.timeline-items -->
+                                    </div>
+                                    <!-- /.timeline-container -->
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.page-content -->
+        </div>
+        <!-- /.main-content -->
+
+        <div class="ace-settings-container" id="ace-settings-container">
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn"
+                 id="ace-settings-btn">
+                <i class="icon-cog bigger-150"></i>
+            </div>
+
+            <div class="ace-settings-box" id="ace-settings-box">
+                <div>
+                    <div class="pull-left">
+                        <select id="skin-colorpicker" class="hide">
+                            <option data-skin="default" value="#438EB9">#438EB9</option>
+                            <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                            <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                            <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                        </select>
+                    </div>
+                    <span>&nbsp; Choose Skin</span>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /#ace-settings-container -->
+    </div>
+    <!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up"
+       class="btn-scroll-up btn btn-sm btn-inverse"> <i
+            class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+<!-- /.main-container -->
+
+<!-- basic scripts -->
+
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/typeahead-bs2.min.js"></script>
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('[data-toggle="buttons"] .btn').on('click', function (e) {
+            var target = $(this).find('input[type=radio]');
+            var which = parseInt(target.val());
+            $('[id*="timeline-"]').addClass('hide');
+            $('#timeline-' + which).removeClass('hide');
+        });
+    });
+    var localhost = 'http://' + location.host + "/online-service/";
+    var path = 'Messageinfo';
+
+    function baseCtrl($scope, $http) {
+        $scope.search = "比赛信息";
+        $scope.query = function () {
+            $http({
+                method: "POST",
+                url: localhost + path + "/getQuery",
+                data: $scope.search
+            }).then(function successCallback(response) {
+                $scope.infos = response.data.list;
+            }, function errorCallback(response) {
+                // 请求失败执行代码
+                $scope.msg = "系统异常";
+            });
+        };
+        $scope.query();
+
+    }
+</script>
+<script src="assets/js/filterrolestudent.js"></script>
+</body>
+</html>

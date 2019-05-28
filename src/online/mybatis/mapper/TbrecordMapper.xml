@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.mybatis.mapper.TbrecordMapper">
+    <resultMap id="BaseResultMap" type="online.mybatis.model.Tbrecord">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="oprid" jdbcType="VARCHAR" property="oprid"/>
+        <result column="oprtime" jdbcType="VARCHAR" property="oprtime"/>
+        <result column="oprttype" jdbcType="VARCHAR" property="oprttype"/>
+        <result column="oprmemo" jdbcType="VARCHAR" property="oprmemo"/>
+        <result column="spare1" jdbcType="VARCHAR" property="spare1"/>
+        <result column="spare2" jdbcType="VARCHAR" property="spare2"/>
+        <result column="spare3" jdbcType="VARCHAR" property="spare3"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+   	 oprid,
+   	 oprtime,
+   	 oprttype,
+   	 oprmemo,
+   	 spare1,
+   	 spare2,
+   	 spare3,
+     id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbrecord
+        where ID = #{id , jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey2" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbrecord
+        where oprid = #{oprid, jdbcType=VARCHAR}
+        ORDER BY oprtime desc
+        limit 0,11
+    </select>
+
+    <select id="selectByObj" parameterType="online.mybatis.model.Tbrecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbrecord
+        where 1=1
+        <if test="id != null and  id!= ''">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="oprid != null and  oprid!= ''">
+            and oprid = #{oprid,jdbcType=VARCHAR}
+        </if>
+        <if test="oprtime != null and  oprtime!= ''">
+            and oprtime = #{oprtime,jdbcType=VARCHAR}
+        </if>
+        <if test="oprttype != null and  oprttype!= ''">
+            and oprttype = #{oprttype,jdbcType=VARCHAR}
+        </if>
+        <if test="oprmemo != null and  oprmemo!= ''">
+            and oprmemo = #{oprmemo,jdbcType=VARCHAR}
+        </if>
+        <if test="spare1 != null and  spare1!= ''">
+            and spare1 = #{spare1,jdbcType=VARCHAR}
+        </if>
+        <if test="spare2 != null and  spare2!= ''">
+            and spare2 = #{spare2,jdbcType=VARCHAR}
+        </if>
+        <if test="spare3 != null and  spare3!= ''">
+            and spare3 = #{spare3,jdbcType=VARCHAR}
+        </if>
+
+
+    </select>
+    <select id="selectByObjLike" parameterType="online.mybatis.model.Tbrecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbrecord
+        where 1=1
+        <if test="id != null and  id!= ''">
+            and id like CONCAT('%', #{id,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="oprid != null and  oprid!= ''">
+            and oprid like CONCAT('%', #{oprid,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="oprtime != null and  oprtime!= ''">
+            and oprtime like CONCAT('%', #{oprtime,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="oprttype != null and  oprttype!= ''">
+            and oprttype like CONCAT('%', #{oprttype,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="oprmemo != null and  oprmemo!= ''">
+            and oprmemo like CONCAT('%', #{oprmemo,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="spare1 != null and  spare1!= ''">
+            and spare1 like CONCAT('%', #{spare1,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="spare2 != null and  spare2!= ''">
+            and spare2 like CONCAT('%', #{spare2,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="spare3 != null and  spare3!= ''">
+            and spare3 like CONCAT('%', #{spare3,jdbcType=VARCHAR}, '%')
+        </if>
+
+    </select>
+    <select id="selectOtherRecord" resultType="online.mybatis.model.Tbrecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbrecord
+        ORDER BY oprtime desc
+        limit 0,20
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbrecord
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="online.mybatis.model.Tbrecord">
+        insert into tbrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="id != null and  id!= ''">
+                id,
+            </if>
+            <if test="oprid != null and  oprid!= ''">
+                oprid,
+            </if>
+            <if test="oprtime != null and  oprtime!= ''">
+                oprtime,
+            </if>
+            <if test="oprttype != null and  oprttype!= ''">
+                oprttype,
+            </if>
+            <if test="oprmemo != null and  oprmemo!= ''">
+                oprmemo,
+            </if>
+            <if test="spare1 != null and  spare1!= ''">
+                spare1,
+            </if>
+            <if test="spare2 != null and  spare2!= ''">
+                spare2,
+            </if>
+            <if test="spare3 != null and  spare3!= ''">
+                spare3,
+            </if>
+
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test=" id != null and  id!= ''">
+                #{ id,jdbcType=VARCHAR},
+            </if>
+            <if test=" oprid != null and  oprid!= ''">
+                #{ oprid,jdbcType=VARCHAR},
+            </if>
+            <if test=" oprtime != null and  oprtime!= ''">
+                #{ oprtime,jdbcType=VARCHAR},
+            </if>
+            <if test=" oprttype != null and  oprttype!= ''">
+                #{ oprttype,jdbcType=VARCHAR},
+            </if>
+            <if test=" oprmemo != null and  oprmemo!= ''">
+                #{ oprmemo,jdbcType=VARCHAR},
+            </if>
+            <if test=" spare1 != null and  spare1!= ''">
+                #{ spare1,jdbcType=VARCHAR},
+            </if>
+            <if test=" spare2 != null and  spare2!= ''">
+                #{ spare2,jdbcType=VARCHAR},
+            </if>
+            <if test=" spare3 != null and  spare3!= ''">
+                #{ spare3,jdbcType=VARCHAR},
+            </if>
+
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="online.mybatis.model.Tbrecord">
+        update tbrecord
+        <set>
+            <if test="id != null and  id!= ''">
+                id = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="oprid != null and  oprid!= ''">
+                oprid = #{oprid,jdbcType=VARCHAR},
+            </if>
+            <if test="oprtime != null and  oprtime!= ''">
+                oprtime = #{oprtime,jdbcType=VARCHAR},
+            </if>
+            <if test="oprttype != null and  oprttype!= ''">
+                oprttype = #{oprttype,jdbcType=VARCHAR},
+            </if>
+            <if test="oprmemo != null and  oprmemo!= ''">
+                oprmemo = #{oprmemo,jdbcType=VARCHAR},
+            </if>
+            <if test="spare1 != null and  spare1!= ''">
+                spare1 = #{spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="spare2 != null and  spare2!= ''">
+                spare2 = #{spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="spare3 != null and  spare3!= ''">
+                spare3 = #{spare3,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

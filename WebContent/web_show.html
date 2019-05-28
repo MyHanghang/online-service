@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+    <title>第二课堂-首页</title>
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="assets/css/offcanvas.css" rel="stylesheet">
+    <script src="/assets/js/ie-emulation-modes-warning.js"></script>
+    <![endif]-->
+</head>
+
+<script type="text/javascript">
+
+    function personCenter() {
+        alert("你还没登录，请登录后进行操作！")
+        window.location = "/online-service/login.html";
+    }
+
+    function login() {
+        window.location = "/online-service/login.html";
+    }
+</script>
+<body>
+<nav class="navbar navbar-fixed-top " style="background: #428bca">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="web_show.html" style="color: whitesmoke">第二课堂</a>
+        </div>
+        <div id="navbar" class="nav nav-pills">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="web_show.html" style="color: whitesmoke">主页</a></li>
+                <li><a onclick="personCenter()" href="#about" style="color: whitesmoke">个人中心</a></li>
+                <li><a href="#contact" style="color: whitesmoke">联系我们</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class=" navbar-form navbar-right">
+                <button type="submit" onclick="login()" class="btn btn-default">登录</button>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+<li role="separator" class="divider"></li>
+<div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+            <div class="jumbotron" style="width: 847.5px;height: 270px">
+                <img id="lunbo" src="assets/images/home.jpg" style="width: 847.5px;height: 270px;float: left">
+            </div>
+            <div class="row">
+                <button class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;">视频专区</button>
+                <div class="col-xs-6 col-lg-4">
+                    <h3 style="text-align: center">地球奇观欣赏</h3>
+                    <video style="width:280px; height:140px;"
+                           src="upload/513232351.mp4" controls="controls">
+                    </video>
+                    <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h3 style="text-align: center">七天掌握PHP语言</h3>
+                    <video style="width:280px; height:140px;"
+                           src="upload/514013329.mp4" controls="controls">
+                    </video>
+                    <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h3 style="text-align: center">日常口语交流</h3>
+                    <video style="width:280px; height:140px;"
+                           src="upload/514013701.mp4" controls="controls">
+                    </video>
+                    <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+            </div>
+            <div class="row">
+                <button class="btn btn-success btn-lg btn-block" style="margin-top: 20px;"><strong>随堂考试</strong>
+                </button>
+                <div class="col-xs-6 col-lg-4">
+                    <h3>计算机基础第一章</h3>
+                    <h4>所属类型：计算机类</h4>
+                    <h4>题目数：20道</h4>
+                    <h4>难度：初级</h4>
+                    <h4>总分：100分</h4>
+                    <p><a class="btn btn-default" href="#" role="button">立即考试 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h3>机械设计第三章</h3>
+                    <h4>所属类型：机械类</h4>
+                    <h4>题目数：20道</h4>
+                    <h4>难度：中级</h4>
+                    <h4>总分：100分</h4>
+                    <p><a class="btn btn-default" href="#" role="button">立即考试 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h3>商务英语练习</h3>
+                    <h4>所属类：外语类</h4>
+                    <h4>题目数：20道</h4>
+                    <h4>难度：高级</h4>
+                    <h4>总分：100分</h4>
+                    <p><a class="btn btn-default" href="#" role="button">立即考试 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+            </div>
+            <div class="row">
+                <button class="btn btn-danger btn-lg btn-block" style="margin-top: 20px;">通知公告</button>
+                <div class="col-xs-6 col-lg-4">
+                    <h3>微信小程序大赛</h3>
+                    <h5>发布时间：2019年5月13日 下午 16:35</h5>
+                    <p>
+                        计算机学院准备于2019.6.5日，在四川轻化工大学宜宾校区A8教学楼211室现场进行
+                        微信小程序编程大赛，本次比赛分为三个奖项：一等奖1名，二等奖2名，三等奖5名。
+                    <p><a class="btn btn-default" href="#" role="button">报名参加 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h3>大学生创业指导</h3>
+                    <h5>发布时间：2019年5月6日 上午9:00</h5>
+                    <p>
+                        计算机学院准备于2019.4.25日，在四川轻化工大学宜宾校区A11教学楼312室现场进行大学生创业指导训练。
+                    <p><a class="btn btn-default" href="#" role="button">报名参加 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h3>学校诗歌朗诵比赛</h3>
+                    <h5>发布时间：2019年5月7日 上午9:56</h5>
+                    <p>
+                        计算机学院准备于2019.6.5日，在四川轻化工大学宜宾校区A8教学楼211室现场进行
+                        微信小程序编程大赛，本次比赛分为三个奖项：一等奖1名，二等奖2名，三等奖5名。
+                    <p><a class="btn btn-default" href="#" role="button">报名参加 &raquo;</a></p>
+                </div><!--/.col-xs-6.col-lg-4-->
+            </div>
+            <!--/row-->
+        </div><!--/.col-xs-12.col-sm-9-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><strong style="font-size: 16px">TA的动态</strong></a>
+                <a href="#" class="list-group-item">罗同学 于 【 2019-05-15 14:39 】: 登陆了系统</a>
+                <a href="#" class="list-group-item">张同学 于 【 2019-05-15 14:39 】: 登陆了系统</a>
+                <a href="#" class="list-group-item">王同学 于 【 2019-05-15 02:46 】: 参加了名称[计算机基础]的试卷</a>
+                <a href="#" class="list-group-item">彭同学 于 【 2019-05-15 14:39 】: 登陆了系统</a>
+                <a href="#" class="list-group-item">方同学 于 【 2019-05-15 02:49 】: 观看了名称[应用数学基础]的视频</a>
+                <a href="#" class="list-group-item">廖同学 于 【 2019-05-15 14:39 】: 登陆了系统</a>
+                <a href="#" class="list-group-item">王同学 于 【 2019-05-15 02:49 】: 关注了名称[地球奇观欣赏]的视频</a>
+                <a href="#" class="list-group-item">欧老师 于 【 2019-05-15 02:49 】: 发布了名称[逻辑趣谈]的视频</a>
+                <a href="#" class="list-group-item">管理员 于 【 2019-05-15 02:49 】: 发布了名称[英语读写比赛]的公告</a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item active btn-danger"><strong style="font-size: 16px">系统通告</strong></a>
+                <a href="#" class="list-group-item">2019年5月12日上午8:00系统将进行维护，预计维护4小时，给大家带来的不便，敬请谅解！</a>
+                <a href="#" class="list-group-item">系统新增个人信息设置。</a>
+                <a href="#" class="list-group-item">......</a>
+            </div>
+        </div>
+    </div><!--/row-->
+    <hr style="height:3px;border:none;border-top:3px double black;">
+    <footer style="text-align: center">
+        <p>&copy; Company 2019 第二课堂学习平台 版权所有 蜀ICP备19015743号</p>
+    </footer>
+
+</div><!--/.container-->
+<script type="text/javascript">
+    var curIndex = 0;
+    //时间间隔(单位毫秒)，每秒钟显示一张，数组共有3张图片放在img文件夹下
+    var timeInterval = 4000;
+    //定义一个存放照片位置的数组，可以放任意个，在这里放3个
+    var arr = [];
+    arr[0] = "./assets/images/college.jpg";
+    arr[1] = "./assets/images/college1.jpg";
+    arr[2] = "./assets/images/college2.jpg";
+    arr[3] = "./assets/images/college3.jpg";
+    arr[4] = "./assets/images/college4.jpg";
+    setInterval(changeImg, timeInterval);
+
+    function changeImg() {
+        if (curIndex == arr.length - 1) {
+            curIndex = 0;
+        } else {
+            curIndex += 1;
+        }
+        //设置body的背景图片
+        $("#lunbo").style.backgroundImage = "URL(" + arr[curIndex] + ")"; //显示对应的图片
+    }
+
+    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+<script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="assets/js/offcanvas.js"></script>
+</body>
+</html>

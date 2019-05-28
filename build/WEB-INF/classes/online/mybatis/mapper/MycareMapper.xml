@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.mybatis.mapper.MycareMapper">
+  <resultMap id="BaseResultMap" type="online.mybatis.model.Mycare">
+    <result column="id" jdbcType="VARCHAR" property="id" />  
+    <result column="myid" jdbcType="VARCHAR" property="myid" />  
+    <result column="careid" jdbcType="VARCHAR" property="careid" />  
+    <result column="type" jdbcType="VARCHAR" property="type" />  
+    <result column="spare1" jdbcType="VARCHAR" property="spare1" />  
+    <result column="spare2" jdbcType="VARCHAR" property="spare2" />  
+    <result column="spare3" jdbcType="VARCHAR" property="spare3" />  
+  </resultMap>
+  <sql id="Base_Column_List">
+   	 myid,
+   	 careid,
+   	 type,
+   	 spare1,
+   	 spare2,
+   	 spare3,
+     id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycare
+    where ID = #{id , jdbcType=VARCHAR}
+  </select>
+   <select id="selectByObj" parameterType="online.mybatis.model.Mycare" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycare
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id = #{id,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="myid != null and  myid!= ''">
+    	   and myid = #{myid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="careid != null and  careid!= ''">
+    	   and careid = #{careid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type = #{type,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="spare1 != null and  spare1!= ''">
+    	   and spare1 = #{spare1,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="spare2 != null and  spare2!= ''">
+    	   and spare2 = #{spare2,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="spare3 != null and  spare3!= ''">
+    	   and spare3 = #{spare3,jdbcType=VARCHAR}
+   		   </if>
+  
+    
+  </select>
+   <select id="selectByObjLike" parameterType="online.mybatis.model.Mycare" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mycare
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id like CONCAT('%', #{id,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="myid != null and  myid!= ''">
+    	   and myid like CONCAT('%', #{myid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="careid != null and  careid!= ''">
+    	   and careid like CONCAT('%', #{careid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type like CONCAT('%', #{type,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="spare1 != null and  spare1!= ''">
+    	   and spare1 like CONCAT('%', #{spare1,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="spare2 != null and  spare2!= ''">
+    	   and spare2 like CONCAT('%', #{spare2,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="spare3 != null and  spare3!= ''">
+    	   and spare3 like CONCAT('%', #{spare3,jdbcType=VARCHAR}, '%')
+   		   </if>
+ 	  
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from mycare
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByObj" parameterType="online.mybatis.model.Mycare">
+    delete from mycare
+        where type = #{type,jdbcType=VARCHAR} and myid=#{myid,jdbcType=VARCHAR and careid=#{careid,jdbcType=VARCHAR}
+    
+  </delete>
+  <insert id="insert" parameterType="online.mybatis.model.Mycare">
+    insert into mycare
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      
+        <if test="id != null and  id!= ''">
+        id,
+     	 </if>
+        <if test="myid != null and  myid!= ''">
+        myid,
+     	 </if>
+        <if test="careid != null and  careid!= ''">
+        careid,
+     	 </if>
+        <if test="type != null and  type!= ''">
+        type,
+     	 </if>
+        <if test="spare1 != null and  spare1!= ''">
+        spare1,
+     	 </if>
+        <if test="spare2 != null and  spare2!= ''">
+        spare2,
+     	 </if>
+        <if test="spare3 != null and  spare3!= ''">
+        spare3,
+     	 </if>
+
+  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     	 <if test=" id != null and  id!= ''">
+       #{ id,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" myid != null and  myid!= ''">
+       #{ myid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" careid != null and  careid!= ''">
+       #{ careid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" type != null and  type!= ''">
+       #{ type,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" spare1 != null and  spare1!= ''">
+       #{ spare1,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" spare2 != null and  spare2!= ''">
+       #{ spare2,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" spare3 != null and  spare3!= ''">
+       #{ spare3,jdbcType=VARCHAR},
+      </if>
+      
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="online.mybatis.model.Mycare">
+    update mycare
+    <set>
+     	 <if test="id != null and  id!= ''">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+     	 <if test="myid != null and  myid!= ''">
+        myid = #{myid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="careid != null and  careid!= ''">
+        careid = #{careid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="type != null and  type!= ''">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+     	 <if test="spare1 != null and  spare1!= ''">
+        spare1 = #{spare1,jdbcType=VARCHAR},
+      </if>
+     	 <if test="spare2 != null and  spare2!= ''">
+        spare2 = #{spare2,jdbcType=VARCHAR},
+      </if>
+     	 <if test="spare3 != null and  spare3!= ''">
+        spare3 = #{spare3,jdbcType=VARCHAR},
+      </if>
+    
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

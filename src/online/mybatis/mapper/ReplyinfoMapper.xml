@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.mybatis.mapper.ReplyinfoMapper">
+  <resultMap id="BaseResultMap" type="online.mybatis.model.Replyinfo">
+    <result column="id" jdbcType="VARCHAR" property="id" />  
+    <result column="memo" jdbcType="VARCHAR" property="memo" />  
+    <result column="oprid" jdbcType="VARCHAR" property="oprid" />  
+    <result column="oprtime" jdbcType="VARCHAR" property="oprtime" />  
+    <result column="videoid" jdbcType="VARCHAR" property="videoid" />  
+    <result column="parentid" jdbcType="VARCHAR" property="parentid" />  
+    <result column="parentoprid" jdbcType="VARCHAR" property="parentoprid" />  
+    <result column="parentoprtime" jdbcType="VARCHAR" property="parentoprtime" />  
+    <result column="type" jdbcType="VARCHAR" property="type" />  
+    <result column="istop" jdbcType="VARCHAR" property="istop" />  
+    <result column="ispraise" jdbcType="VARCHAR" property="ispraise" />  
+  </resultMap>
+  <sql id="Base_Column_List">
+   	 memo,
+   	 oprid,
+   	 oprtime,
+   	 videoid,
+   	 parentid,
+   	 parentoprid,
+   	 parentoprtime,
+   	 type,
+   	 istop,
+   	 ispraise,
+     id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from replyinfo
+    where ID = #{id , jdbcType=VARCHAR}
+  </select>
+   <select id="selectByObj" parameterType="online.mybatis.model.Replyinfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from replyinfo
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id = #{id,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="memo != null and  memo!= ''">
+    	   and memo = #{memo,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid = #{oprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime = #{oprtime,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="videoid != null and  videoid!= ''">
+    	   and videoid = #{videoid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="parentid != null and  parentid!= ''">
+    	   and parentid = #{parentid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="parentoprid != null and  parentoprid!= ''">
+    	   and parentoprid = #{parentoprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="parentoprtime != null and  parentoprtime!= ''">
+    	   and parentoprtime = #{parentoprtime,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type = #{type,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="istop != null and  istop!= ''">
+    	   and istop = #{istop,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="ispraise != null and  ispraise!= ''">
+    	   and ispraise = #{ispraise,jdbcType=VARCHAR}
+   		   </if>
+  
+    
+  </select>
+  
+  <select id="getList" parameterType="online.mybatis.model.Replyinfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from replyinfo
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id = #{id,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="memo != null and  memo!= ''">
+    	   and memo = #{memo,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid = #{oprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime = #{oprtime,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="videoid != null and  videoid!= ''">
+    	   and videoid = #{videoid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="parentid != null and  parentid!= ''">
+    	   and parentid = #{parentid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="parentoprid != null and  parentoprid!= ''">
+    	   and parentoprid = #{parentoprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="parentoprtime != null and  parentoprtime!= ''">
+    	   and parentoprtime = #{parentoprtime,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type = #{type,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="istop != null and  istop!= ''">
+    	   and istop = #{istop,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="ispraise != null and  ispraise!= ''">
+    	   and ispraise = #{ispraise,jdbcType=VARCHAR}
+   		   </if>
+  ORDER BY istop DESC,oprtime desc
+
+  </select>
+   <select id="selectByObjLike" parameterType="online.mybatis.model.Replyinfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from replyinfo
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id like CONCAT('%', #{id,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="memo != null and  memo!= ''">
+    	   and memo like CONCAT('%', #{memo,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid like CONCAT('%', #{oprid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime like CONCAT('%', #{oprtime,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="videoid != null and  videoid!= ''">
+    	   and videoid like CONCAT('%', #{videoid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="parentid != null and  parentid!= ''">
+    	   and parentid like CONCAT('%', #{parentid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="parentoprid != null and  parentoprid!= ''">
+    	   and parentoprid like CONCAT('%', #{parentoprid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="parentoprtime != null and  parentoprtime!= ''">
+    	   and parentoprtime like CONCAT('%', #{parentoprtime,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type like CONCAT('%', #{type,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="istop != null and  istop!= ''">
+    	   and istop like CONCAT('%', #{istop,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="ispraise != null and  ispraise!= ''">
+    	   and ispraise like CONCAT('%', #{ispraise,jdbcType=VARCHAR}, '%')
+   		   </if>
+ 	  
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from replyinfo
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insert" parameterType="online.mybatis.model.Replyinfo">
+    insert into replyinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      
+        <if test="id != null and  id!= ''">
+        id,
+     	 </if>
+        <if test="memo != null and  memo!= ''">
+        memo,
+     	 </if>
+        <if test="oprid != null and  oprid!= ''">
+        oprid,
+     	 </if>
+        <if test="oprtime != null and  oprtime!= ''">
+        oprtime,
+     	 </if>
+        <if test="videoid != null and  videoid!= ''">
+        videoid,
+     	 </if>
+        <if test="parentid != null and  parentid!= ''">
+        parentid,
+     	 </if>
+        <if test="parentoprid != null and  parentoprid!= ''">
+        parentoprid,
+     	 </if>
+        <if test="parentoprtime != null and  parentoprtime!= ''">
+        parentoprtime,
+     	 </if>
+        <if test="type != null and  type!= ''">
+        type,
+     	 </if>
+        <if test="istop != null and  istop!= ''">
+        istop,
+     	 </if>
+        <if test="ispraise != null and  ispraise!= ''">
+        ispraise,
+     	 </if>
+
+  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     	 <if test=" id != null and  id!= ''">
+       #{ id,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" memo != null and  memo!= ''">
+       #{ memo,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" oprid != null and  oprid!= ''">
+       #{ oprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" oprtime != null and  oprtime!= ''">
+       #{ oprtime,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" videoid != null and  videoid!= ''">
+       #{ videoid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" parentid != null and  parentid!= ''">
+       #{ parentid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" parentoprid != null and  parentoprid!= ''">
+       #{ parentoprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" parentoprtime != null and  parentoprtime!= ''">
+       #{ parentoprtime,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" type != null and  type!= ''">
+       #{ type,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" istop != null and  istop!= ''">
+       #{ istop,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" ispraise != null and  ispraise!= ''">
+       #{ ispraise,jdbcType=VARCHAR},
+      </if>
+      
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="online.mybatis.model.Replyinfo">
+    update replyinfo
+    <set>
+     	 <if test="id != null and  id!= ''">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+     	 <if test="memo != null and  memo!= ''">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+     	 <if test="oprid != null and  oprid!= ''">
+        oprid = #{oprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="oprtime != null and  oprtime!= ''">
+        oprtime = #{oprtime,jdbcType=VARCHAR},
+      </if>
+     	 <if test="videoid != null and  videoid!= ''">
+        videoid = #{videoid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="parentid != null and  parentid!= ''">
+        parentid = #{parentid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="parentoprid != null and  parentoprid!= ''">
+        parentoprid = #{parentoprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="parentoprtime != null and  parentoprtime!= ''">
+        parentoprtime = #{parentoprtime,jdbcType=VARCHAR},
+      </if>
+     	 <if test="type != null and  type!= ''">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+     	 <if test="istop != null and  istop!= ''">
+        istop = #{istop,jdbcType=VARCHAR},
+      </if>
+     	 <if test="ispraise != null and  ispraise!= ''">
+        ispraise = #{ispraise,jdbcType=VARCHAR},
+      </if>
+    
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="utf-8"/>
+    <title>视频播放</title>
+    <meta name="keywords" content="第二课堂系统"/>
+    <meta name="description" content="第二课堂系统"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400,300"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <script src="angular/outlogin.js"></script>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #qrcode {
+            margin: 100px auto;
+        }
+
+        #text {
+            width: 400px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script src="assets/js/ace-extra.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="baseCtrl">
+    <div ng-include="'stu/head.html'" class="navbar navbar-default"
+         id="navbar"></div>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#"> <span
+                class="menu-text"></span>
+        </a>
+
+        <div ng-include="'stu/menu.html'"></div>
+
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
+                <div class="nav-search" id="nav-search"></div>
+                <!-- #nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="error-container">
+                            <div class="well">
+                                <div>
+                                    <h2 class="lighter smaller">
+                                        <strong><a style="color:red;">课程名：</a>{{videoData.titile}}</strong>
+                                    </h2>
+                                    <div class="modal-body no-padding">
+                                        <video id="video" src="upload/{{videoData.path}}"
+                                               style="width: 900px; height: 600px;" autoplay controls>
+                                            <source src="upload/{{videoData.path}}" type="video/mp4">
+                                        </video>
+                                        <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                                            <li>
+                                                <button class="btn btn-primary btn-sm"
+                                                        onclick="setPlaySpeed1()" type="button">正常播放
+                                                </button>
+                                                <button class="btn btn-primary btn-sm"
+                                                        onclick="setPlaySpeed()" type="button">加速播放
+                                                </button>
+                                                <button class="btn btn-success btn-sm" id="create"
+                                                        type="button">二维码分享
+                                                </button>
+                                                <button class="btn btn-success btn-sm" id="closeCode"
+                                                        type="button">关闭二维码
+                                                </button>
+                                                <button class="btn btn-info btn-sm" id="addcare"
+                                                        ng-click="addcare()" type="button">收藏视频
+                                                </button>
+                                                <button class="btn btn-info btn-sm" id="addcare"
+                                                        ng-click="notcare()" type="button">取消收藏
+                                                </button>
+                                                <button class="btn btn-danger btn-sm" id="addcare"
+                                                        type="button">播放次数 【{{videoData.spare2}}】
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div id="qrcode"></div>
+                                    </div>
+
+                                    <hr/>
+                                    <h4 class="pink">
+                                        <a href="#modal-table1" id='reply1' role="button"
+                                           class="btn btn-primary btn-lg" data-toggle="modal">发表评论
+                                        </a> <a href="#1" id='relyname' role="button" class="green"
+                                                data-toggle="modal"> </a>
+
+                                    </h4>
+                                    <div class="space"></div>
+                                    <div class="row">
+                                        <div id='table1' class="col-xs-12">
+                                            <div class="table-responsive">
+                                                <table id="sample-table-1"
+                                                       class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>回复内容</th>
+                                                        <th>回复人</th>
+                                                        <th>关注</th>
+                                                        <th>回复时间</th>
+                                                        <th>被赞次数</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody ng-repeat="x in infos">
+                                                    <tr>
+                                                        <td>{{$index+1}}</td>
+                                                        <td><i class="{{x.istop}}"/>{{x.memo}}</td>
+                                                        <td>{{x.oprid}}</td>
+                                                        <td><a href="#" role="button" class="green"
+                                                               ng-click="careIndex($index)" data-toggle="modal">
+                                                            关注【{{x.oprid}}】</a></td>
+                                                        <td>{{x.oprtime}}</td>
+                                                        <td>👍【{{x.ispraise}}】</td>
+                                                        <td class="hidden-480"><a href="#modal-table2"
+                                                                                  role="button" class="green"
+                                                                                  ng-click="getModel($index)"
+                                                                                  data-toggle="modal"> 回复此层</a> <a
+                                                                href="#" role="button"
+                                                                class="green" ng-click="query1($index)"
+                                                                data-toggle="modal"> 查看此层回复</a> <a href="#"
+                                                                                                   role="button"
+                                                                                                   class="green"
+                                                                                                   ng-click="addPrise($index)"
+                                                                                                   data-toggle="modal">
+                                                            点赞👍</a>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="modal-footer no-margin-top">
+                                                    <button class="btn btn-sm btn-danger pull-left"
+                                                            data-dismiss="modal">总共 {{sumCount}} 条 共
+                                                        {{sumPage}} 页，当前 {{currentPage}} 页
+                                                    </button>
+
+                                                    <ul class="pagination pull-right no-margin">
+                                                        <li class="prev"><a href=""> <i
+                                                                class="icon-double-angle-left"
+                                                                ng-click='previous()'>上一页</i>
+                                                        </a></li>
+
+                                                        <li><a href="#">{{currentPage}}</a></li>
+                                                        <li class="next"><a href=""> <i
+                                                                class="icon-double-angle-right"
+                                                                ng-click='next()'>下一页</i>
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id='table2' class="col-xs-12">
+
+                                            <div class="table-responsive">
+                                                <table id="sample-table-1"
+                                                       class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>回复记录</th>
+                                                        <th>内容</th>
+                                                        <th>回复</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody ng-repeat="x in infos1">
+                                                    <tr>
+                                                        <td>{{$index+1}}</td>
+                                                        <td>用户【{{x.oprid}}】在【{{x.oprtime}}】回复用户【{{x.parentoprid}}】</td>
+                                                        <td>回复：【{{x.memo}}】</td>
+                                                        <td class="hidden-480"><a href="#modal-table3"
+                                                                                  role="button" class="green"
+                                                                                  ng-click="getModel1($index)"
+                                                                                  data-toggle="modal">
+                                                            回复此层</a>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="modal-footer no-margin-top">
+                                                    <button class="btn btn-sm btn-danger pull-left"
+                                                            data-dismiss="modal">总共 {{sumCount1}} 条 共
+                                                        {{sumPage}} 页，当前 {{currentPage1}} 页
+                                                    </button>
+
+                                                    <ul class="pagination pull-right no-margin">
+                                                        <li class="prev"><a href=""> <i
+                                                                class="icon-double-angle-left" ng-click='previous1()'>上一页</i>
+                                                        </a></li>
+
+                                                        <li><a href="#">{{currentPage}}</a></li>
+                                                        <li class="next"><a href=""> <i
+                                                                class="icon-double-angle-right"
+                                                                ng-click='next1()'>下一页</i>
+                                                        </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="center">
+                                        <button href="#" class="btn btn-success btn-sm"
+                                                onclick='return1()'>返回上一层回复
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="modal-table1" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body no-padding">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <br/> <label
+                                                        class="col-sm-3 control-label no-padding-right"
+                                                        for="form-field-1"
+                                                        style="font-size: 16px"><strong>评论内容：</strong></label>
+                                                    <div class="col-sm-9">
+															<textarea cols="50" style="resize: none" id="form-field-1"
+                                                                      ng-model="conf.memo" placeholder="输入你要评论的内容~"
+                                                                      required="required"></textarea>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer no-margin-top">
+                                            <div class="form-group"></div>
+                                            <button class="btn btn-success btn-sm" type="button"
+                                                    ng-click="add()">提交
+                                            </button>
+                                            <button class="btn btn-sm btn-danger pull-left"
+                                                    data-dismiss="modal">关闭
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="modal-table2" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-body no-padding">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="space-4"></div>
+                                                <div class="space-4"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right"
+                                                           for="form-field-1">回复 <a style="color:red;">{{replyconf.oprid}}:</a></label>
+
+                                                    <div class="col-sm-9">
+															<textarea width="100%;" id="form-field-1"
+                                                                      ng-model="replyconf.memo" placeholder="内容"
+                                                                      class="col-xs-10 col-sm-5 "
+                                                                      required="required"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="space-4"></div>
+
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer no-margin-top">
+                                            <div class="form-group"></div>
+                                            <button class="btn btn-info btn-sm" type="button"
+                                                    ng-click="add1()">提交
+                                            </button>
+                                            <button class="btn btn-sm btn-danger pull-left"
+                                                    data-dismiss="modal">关闭
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+
+                                <!-- PAGE CONTENT ENDS -->
+                            </div>
+                            <!-- /.col -->
+                            <div id="modal-table3" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body no-padding">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="space-4"></div>
+                                                <div class="space-4"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right"
+                                                           for="form-field-1">回复用户{{replyconf.oprid}}:</label>
+
+                                                    <div class="col-sm-9">
+															<textarea width="100%;" id="form-field-1"
+                                                                      ng-model="replyconf1.memo" placeholder="内容"
+                                                                      class="col-xs-10 col-sm-5"
+                                                                      required="required"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="space-4"></div>
+
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer no-margin-top">
+                                            <div class="form-group"></div>
+                                            <button class="btn btn-info btn-sm" type="button"
+                                                    ng-click="add2()">提交
+                                            </button>
+                                            <button class="btn btn-sm btn-danger pull-left"
+                                                    data-dismiss="modal">关闭
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.page-content -->
+                    </div>
+                    <!-- /.main-content -->
+
+                    <div class="ace-settings-container" id="ace-settings-container">
+                        <div class="btn btn-app btn-xs btn-warning ace-settings-btn"
+                             id="ace-settings-btn">
+                            <i class="icon-cog bigger-150"></i>
+                        </div>
+
+                        <div class="ace-settings-box" id="ace-settings-box">
+                            <div>
+                                <div class="pull-left">
+                                    <select id="skin-colorpicker" class="hide">
+                                        <option data-skin="default" value="#438EB9">#438EB9</option>
+                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                                    </select>
+                                </div>
+                                <span>&nbsp; Choose Skin</span>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" class="ace ace-checkbox-2"
+                                       id="ace-settings-navbar"/> <label class="lbl"
+                                                                         for="ace-settings-navbar"> Fixed Navbar</label>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" class="ace ace-checkbox-2"
+                                       id="ace-settings-sidebar"/> <label class="lbl"
+                                                                          for="ace-settings-sidebar"> Fixed
+                                Sidebar</label>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" class="ace ace-checkbox-2"
+                                       id="ace-settings-breadcrumbs"/> <label class="lbl"
+                                                                              for="ace-settings-breadcrumbs"> Fixed
+                                Breadcrumbs</label>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" class="ace ace-checkbox-2"
+                                       id="ace-settings-rtl"/> <label class="lbl"
+                                                                      for="ace-settings-rtl"> Right To Left
+                                (rtl)</label>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" class="ace ace-checkbox-2"
+                                       id="ace-settings-add-container"/> <label class="lbl"
+                                                                                for="ace-settings-add-container"> Inside
+                                <b>.container</b>
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /#ace-settings-container -->
+                </div>
+                <!-- /.main-container-inner -->
+                <a href="#" id="btn-scroll-up"
+                   class="btn-scroll-up btn btn-sm btn-inverse"> <i
+                        class="icon-double-angle-up icon-only bigger-110"></i>
+                </a>
+            </div>
+            <!-- /.main-container -->
+            <!-- basic scripts -->
+            <!--[if !IE]> -->
+            <script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+            <!-- <![endif]-->
+            <!--[if IE]>
+            <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+            <![endif]-->
+            <!--[if !IE]> -->
+            <script type="text/javascript">
+                window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+            </script>
+            <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+            <script type="text/javascript">
+                window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+            </script>
+            <script type="text/javascript">
+                var ipAddress = 'http://' + location.host;
+                var projectNmae = "/online-service/";
+                var token = "";
+                var parentid = '';
+                var baseUrl = ipAddress + projectNmae;
+                $('#closeCode').click(function () {
+                    $('#qrcode').empty();
+                });
+                $('#create').click(function () {
+                    var ip = "";
+                    // 初始化内容
+                    alert("使用手机扫码进行观看（手机和电脑需处于同一wifi下）");
+                    $('#qrcode').empty();
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "TbConf/getConf",
+                        dataType: "json",
+                        data: '',
+                        success: function (data) {
+                            ip = data.ip;
+                            $("#qrcode").qrcode({
+                                width: 300,
+                                height: 300,
+                                text: "http://" + ip + ":8080/online-service/player/index.html"
+                            })
+                        },
+                        error: function (jqXHR) {
+                            console.log("Error: " + jqXHR.status);
+                        }
+                    });
+                })
+            </script>
+            <script type="text/javascript">
+                var myVideo = document.getElementById("video");
+
+                function getPlaySpeed() {
+                    alert(myVideo.playbackRate); //获取播放速度
+                }
+
+                function setPlaySpeed() {
+                    myVideo.playbackRate = myVideo.playbackRate + 2; //设定新的播放速度2倍速度
+                }
+
+                function code() {
+                    myVideo.playbackRate = myVideo.playbackRate + 2; //设定新的播放速度2倍速度
+                }
+
+                function setPlaySpeed1() {
+                    myVideo.playbackRate = 1; //设定新的播放速度2倍速度
+                }
+
+                function return1() {
+                    $('#table2').hide();
+                    $('#table1').show();
+                    $('#reply1').show();
+                }
+
+                //学习考试系统js
+
+                var ipAddress = 'http://' + location.host;
+                var projectNmae = "/online-service/";
+                var token = "";
+                var parentid = '';
+                var baseUrl = ipAddress + projectNmae;
+
+                //增删改查功能实现
+                function baseCtrl($scope, $http) {
+
+                    //获取板块视频信息 ，获取评论列表
+                    $scope.videoData = "";
+                    $scope.getVideoInfo = function () {
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "video/getMore"
+                        }).then(function successCallback(response) {
+                            $scope.videoData = response.data.videoInfo;
+
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+
+                    $scope.getVideoInfo();
+                    $scope.search = {
+                        currentPage: 1
+                    };
+                    $scope.getSelect = function () {
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "sys/select"
+                        }).then(function successCallback(response) {
+                            $scope.selectData = response.data.list;
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.query = function () {
+
+                        $scope.search.videoid = $scope.videoData.id;
+                        $scope.search.type = '父节点';
+                        $('#table2').hide();
+                        $('#table1').show();
+                        $('#reply1').show();
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Replyinfo/query",
+                            data: $scope.search
+                        }).then(function successCallback(response) {
+                            $scope.infos = response.data.list;
+                            $scope.currentPage = response.data.currentPage;
+                            $scope.sumCount = response.data.sumCount;
+                            $scope.sumPage = response.data.sumPage;
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.query();
+                    $scope.addcareRequest = {
+                        careid: '',
+                        type: ''
+                    };
+                    $scope.addcare = function () {
+                        $scope.addcareRequest.careid = $scope.videoData.id;
+                        $scope.addcareRequest.type = '收藏';
+
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Mycare/query",
+                            data: $scope.addcareRequest
+                        }).then(function successCallback(response) {
+                            // $scope.videoData = response.data;
+                            if (response.data.sumCount > 0) {
+                                alert('您已经收藏过该资源！')
+                            } else {
+                                $scope.addcare1()
+                            }
+                            debugger;
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.addcare1 = function () {
+                        $scope.addcareRequest.careid = $scope.videoData.id;
+                        $scope.addcareRequest.type = '收藏';
+
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Mycare/save",
+                            data: $scope.addcareRequest
+                        }).then(function successCallback(response) {
+
+                            alert('收藏成功！')
+
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.notcare = function () {
+                        $scope.addcareRequest.careid = $scope.videoData.id;
+                        $scope.addcareRequest.type = '收藏';
+
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Mycare/del",
+                            data: $scope.addcareRequest
+                        }).then(function successCallback(response) {
+
+                            alert('取消收藏成功！')
+
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.care = function () {
+                        var id = $scope.videoData.id;
+                        $scope.addcareRequest.careid = $scope.videoData.id;
+                        $scope.addcareRequest.type = '关注';
+
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Mycare/query",
+                            data: $scope.addcareRequest
+                        }).then(function successCallback(response) {
+                            // $scope.videoData = response.data;
+                            if (response.data.sumCount > 0) {
+                                alert('您已经关注过啦！')
+                            } else {
+                                $scope.care1(id)
+                            }
+                            debugger;
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.careIndex = function (Count) {
+                        $scope.opr = $scope.infos[Count];
+                        var id = $scope.opr.oprid;
+                        $scope.addcareRequest.careid = id;
+                        $scope.addcareRequest.type = '关注';
+
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Mycare/query",
+                            data: $scope.addcareRequest
+                        }).then(function successCallback(response) {
+                            // $scope.videoData = response.data;
+                            if (response.data.sumCount > 0) {
+                                alert('您已经关注过啦！')
+                            } else {
+                                $scope.care1(id)
+                            }
+                            debugger;
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    $scope.care1 = function (id) {
+                        $scope.addcareRequest.careid = id;
+                        $scope.addcareRequest.type = '关注';
+
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Mycare/save",
+                            data: $scope.addcareRequest
+                        }).then(function successCallback(response) {
+
+                            alert('关注成功！')
+
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    //上一页
+                    $scope.previous = function () {
+                        if ($scope.search.currentPage == '1') {
+                            $scope.search.currentPage = '1';
+                        } else {
+                            $scope.search.currentPage = $scope.currentPage - 1;
+                        }
+                        $scope.query();
+                    };
+                    //下一页
+                    $scope.next = function () {
+                        if ($scope.search.currentPage == $scope.sumPage) {
+                            $scope.search.currentPage = $scope.currentPage;
+                        } else {
+                            $scope.search.currentPage = $scope.currentPage + 1;
+                        }
+                        $scope.query();
+                    };
+                    //添加回复
+                    $scope.add = function () {
+                        $scope.conf.videoid = $scope.videoData.id;
+                        $scope.conf.type = '父节点';
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Replyinfo/add",
+                            data: $scope.conf
+                        }).then(function successCallback(response) {
+                            if (response.data.status == "isban") {
+                                alert("你输入的内容含有敏感词或违禁词，请检查后重新输入！！");
+                            } else {
+                                $scope.conf = '';
+                                $scope.query();
+                                $('#modal-table1').modal('hide');
+                            }
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    //添加回复
+                    $scope.add1 = function () {
+                        $scope.replyconf.parentid = $scope.replyconf.id;
+
+                        $scope.replyconf.parentoprid = $scope.replyconf.oprid;
+                        $scope.replyconf.parentoprid = $scope.replyconf.oprid;
+                        $scope.replyconf.parentoprtime = $scope.replyconf.oprtime;
+                        $scope.replyconf.type = '子节点';
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Replyinfo/add",
+                            data: $scope.replyconf
+                        }).then(function successCallback(response) {
+                            $scope.conf = '';
+                            $scope.query();
+                            $('#modal-table2').modal('hide');
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    //回复中添加回复
+                    $scope.add2 = function () {
+                        //	$scope.replyconf.parentid=$scope.replyconf.id;
+                        $scope.replyconf1.parentoprid = $scope.replyconf1.oprid;
+                        $scope.replyconf1.parentoprtime = $scope.replyconf1.oprtime;
+                        //parentid=$scope.replyconf1.parentoprid;
+                        $scope.replyconf1.type = '子节点';
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Replyinfo/add",
+                            data: $scope.replyconf1
+                        }).then(function successCallback(response) {
+                            $scope.replyconf = '';
+                            $scope.search1.parentid = $scope.replyconf1.id;
+                            $scope.search1.videoid = $scope.replyconf1.videoid;
+
+                            $scope.query1('');
+                            $('#modal-table3').modal('hide');
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    //点赞
+                    $scope.addPrise = function (Count) {
+                        $scope.newinfo = $scope.infos[Count];
+                        if ($scope.newinfo.ispraise == null || $scope.newinfo.ispraise == '') {
+                            $scope.newinfo.ispraise = 0;
+                        }
+                        $scope.newinfo.ispraise = parseInt($scope.newinfo.ispraise) + 1;
+                        //	$scope.replyconf1.type='子节点';
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Replyinfo/save",
+                            data: $scope.newinfo
+                        }).then(function successCallback(response) {
+                            $scope.query();
+
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+                    //获取选择的那列数据
+                    $scope.getModel = function (Count) {
+                        $scope.replyconf = $scope.infos[Count];
+                    };
+                    //获取选择的那列数据
+                    $scope.getModel1 = function (Count) {
+                        $scope.replyconf1 = $scope.infos1[Count];
+                        $scope.replyconf.memo = "";
+                    };
+                    $scope.search1 = {
+                        currentPage: 1
+                    };
+                    $scope.ziconf = '';
+                    $scope.query1 = function (Count) {
+                        if (Count != '') {
+                            $scope.ziconf = $scope.infos[Count];
+                        }
+                        $scope.search1.parentid = $scope.ziconf.id;
+                        $scope.search1.videoid = $scope.ziconf.videoid;
+                        $scope.search1.type = '子节点';
+                        $('#table1').hide();
+                        $('#table2').show();
+                        $('#reply1').hide();
+                        $http({
+                            method: "POST",
+                            url: baseUrl + "Replyinfo/query",
+                            data: $scope.search1
+                        }).then(function successCallback(response) {
+                            $scope.infos1 = response.data.list;
+                            $scope.currentPage1 = response.data.currentPage;
+                            $scope.sumCount1 = response.data.sumCount;
+                            $scope.sumPage1 = response.data.sumPage;
+                            $scope.ziconf1 = $scope.ziconf;
+                        }, function errorCallback(response) {
+                            $scope.message = "系统异常"
+                        });
+                    };
+
+                    //上一页
+                    $scope.previous1 = function () {
+                        if ($scope.search1.currentPage == '1') {
+                            $scope.search1.currentPage = '1';
+                        } else {
+                            $scope.search1.currentPage = $scope.currentPage - 1;
+                        }
+                        $scope.query1();
+                    };
+                    //下一页
+                    $scope.next1 = function () {
+                        if ($scope.search1.currentPage == $scope.sumPage) {
+                            $scope.search1.currentPage = $scope.currentPage;
+                        } else {
+                            $scope.search1.currentPage = $scope.currentPage + 1;
+                        }
+                        $scope.query1();
+                    }
+
+                }
+
+                if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+            </script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="assets/js/typeahead-bs2.min.js"></script>
+            <script src="assets/js/ace-elements.min.js"></script>
+            <script src="assets/js/ace.min.js"></script>
+        </div>
+    </div>
+</div>
+<!-- inline scripts related to this page -->
+</body>
+</html>

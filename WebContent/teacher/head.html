@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+    <link rel="stylesheet" href="assets/js/jquery-2.0.3.min.js"/>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+<body ng-app="myApp" ng-controller="outloginCtrl">
+<div class="navbar-container" id="navbar-container">
+    <div class="navbar-header pull-left">
+        <a href="teachIndex.html" class="navbar-brand">
+            <small>第二课堂系统
+                教师端
+            </small>
+        </a>
+        <!-- /.brand -->
+    </div>
+    <!-- /.navbar-header -->
+    <div class="navbar-header pull-right" role="navigation">
+        <ul class="nav ace-nav">
+            <li class="grey">
+            <li class="light-blue">
+                <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <strong>教师操作</strong>
+                    <span class="caret"></span>
+                </a>
+                <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                    <li>
+                        <a ng-click="outlogin()"><i class="icon-off"></i>退出系统</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- /.ace-nav -->
+    </div>
+    <!-- /.navbar-header -->
+</div>
+<!-- /.container -->
+</body>
+</html>

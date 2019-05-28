@@ -1,0 +1,32 @@
+#scroll_div {
+    height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #b94a48;
+    width:90%;
+    text-align: center;
+    font-size: 16px;
+}
+
+#scroll_begin, #scroll_end {
+    display: inline;
+}
+
+.notice {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    height: 45px;
+}
+
+.notice_list {
+    width: 100%;
+    float: right;
+    height: 33px;
+    overflow: hidden;
+}
+
+.notice_list li {
+    list-style-type: none;
+    height: 33px;
+}

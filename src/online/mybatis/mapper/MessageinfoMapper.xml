@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.mybatis.mapper.MessageinfoMapper">
+  <resultMap id="BaseResultMap" type="online.mybatis.model.Messageinfo">
+    <result column="id" jdbcType="VARCHAR" property="id" />  
+    <result column="name" jdbcType="VARCHAR" property="name" />  
+    <result column="content" jdbcType="VARCHAR" property="content" />  
+    <result column="memo" jdbcType="VARCHAR" property="memo" />  
+    <result column="type" jdbcType="VARCHAR" property="type" />  
+    <result column="oprid" jdbcType="VARCHAR" property="oprid" />  
+    <result column="oprtime" jdbcType="VARCHAR" property="oprtime" />  
+  </resultMap>
+  <sql id="Base_Column_List">
+   	 name,
+   	 content,
+   	 memo,
+   	 type,
+   	 oprid,
+   	 oprtime,
+     id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from messageinfo
+    where ID = #{id , jdbcType=VARCHAR}
+  </select>
+   <select id="selectByObj" parameterType="online.mybatis.model.Messageinfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from messageinfo
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id = #{id,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="name != null and  name!= ''">
+    	   and name = #{name,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="content != null and  content!= ''">
+    	   and content = #{content,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="memo != null and  memo!= ''">
+    	   and memo = #{memo,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type = #{type,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid = #{oprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime = #{oprtime,jdbcType=VARCHAR}
+   		   </if>
+  
+    
+  </select>
+   <select id="selectByObjLike" parameterType="online.mybatis.model.Messageinfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from messageinfo
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id like CONCAT('%', #{id,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="name != null and  name!= ''">
+    	   and name like CONCAT('%', #{name,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="content != null and  content!= ''">
+    	   and content like CONCAT('%', #{content,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="memo != null and  memo!= ''">
+    	   and memo like CONCAT('%', #{memo,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type like CONCAT('%', #{type,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid like CONCAT('%', #{oprid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime like CONCAT('%', #{oprtime,jdbcType=VARCHAR}, '%')
+   		   </if>
+ 	  
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from messageinfo
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insert" parameterType="online.mybatis.model.Messageinfo">
+    insert into messageinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      
+        <if test="id != null and  id!= ''">
+        id,
+     	 </if>
+        <if test="name != null and  name!= ''">
+        name,
+     	 </if>
+        <if test="content != null and  content!= ''">
+        content,
+     	 </if>
+        <if test="memo != null and  memo!= ''">
+        memo,
+     	 </if>
+        <if test="type != null and  type!= ''">
+        type,
+     	 </if>
+        <if test="oprid != null and  oprid!= ''">
+        oprid,
+     	 </if>
+        <if test="oprtime != null and  oprtime!= ''">
+        oprtime,
+     	 </if>
+
+  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     	 <if test=" id != null and  id!= ''">
+       #{ id,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" name != null and  name!= ''">
+       #{ name,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" content != null and  content!= ''">
+       #{ content,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" memo != null and  memo!= ''">
+       #{ memo,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" type != null and  type!= ''">
+       #{ type,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" oprid != null and  oprid!= ''">
+       #{ oprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" oprtime != null and  oprtime!= ''">
+       #{ oprtime,jdbcType=VARCHAR},
+      </if>
+      
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="online.mybatis.model.Messageinfo">
+    update messageinfo
+    <set>
+     	 <if test="id != null and  id!= ''">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+     	 <if test="name != null and  name!= ''">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+     	 <if test="content != null and  content!= ''">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+     	 <if test="memo != null and  memo!= ''">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+     	 <if test="type != null and  type!= ''">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+     	 <if test="oprid != null and  oprid!= ''">
+        oprid = #{oprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="oprtime != null and  oprtime!= ''">
+        oprtime = #{oprtime,jdbcType=VARCHAR},
+      </if>
+    
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+   <select id="getQuery" parameterType="online.mybatis.model.Messageinfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from messageinfo
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id = #{id,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="name != null and  name!= ''">
+    	   and name = #{name,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="content != null and  content!= ''">
+    	   and content = #{content,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="memo != null and  memo!= ''">
+    	   and memo = #{memo,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type = #{type,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid = #{oprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime = #{oprtime,jdbcType=VARCHAR}
+   		   </if>
+  order by oprtime desc
+    
+  </select>
+</mapper>

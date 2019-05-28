@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.mybatis.mapper.TbConfMapper">
+  <resultMap id="BaseResultMap" type="online.mybatis.model.TbConf">
+    <result column="id" jdbcType="VARCHAR" property="id" />  
+    <result column="name" jdbcType="VARCHAR" property="name" />  
+    <result column="type" jdbcType="VARCHAR" property="type" />  
+    <result column="confvalue" jdbcType="VARCHAR" property="confvalue" />  
+    <result column="oprid" jdbcType="VARCHAR" property="oprid" />  
+    <result column="oprtime" jdbcType="VARCHAR" property="oprtime" />  
+    <result column="tempvalue" jdbcType="VARCHAR" property="tempvalue" />  
+  </resultMap>
+  <sql id="Base_Column_List">
+   	 name,
+   	 type,
+   	 confvalue,
+   	 oprid,
+   	 oprtime,
+   	 tempvalue,
+     id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TbConf
+    where ID = #{id , jdbcType=VARCHAR}
+  </select>
+   <select id="selectByObj" parameterType="online.mybatis.model.TbConf" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TbConf
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id = #{id,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="name != null and  name!= ''">
+    	   and name = #{name,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type = #{type,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="confvalue != null and  confvalue!= ''">
+    	   and confvalue = #{confvalue,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid = #{oprid,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime = #{oprtime,jdbcType=VARCHAR}
+   		   </if>
+		 <if test="tempvalue != null and  tempvalue!= ''">
+    	   and tempvalue = #{tempvalue,jdbcType=VARCHAR}
+   		   </if>
+  
+    
+  </select>
+   <select id="selectByObjLike" parameterType="online.mybatis.model.TbConf" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TbConf
+    where 1=1
+		 <if test="id != null and  id!= ''">
+    	   and id like CONCAT('%', #{id,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="name != null and  name!= ''">
+    	   and name like CONCAT('%', #{name,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="type != null and  type!= ''">
+    	   and type like CONCAT('%', #{type,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="confvalue != null and  confvalue!= ''">
+    	   and confvalue like CONCAT('%', #{confvalue,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="oprid != null and  oprid!= ''">
+    	   and oprid like CONCAT('%', #{oprid,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="oprtime != null and  oprtime!= ''">
+    	   and oprtime like CONCAT('%', #{oprtime,jdbcType=VARCHAR}, '%')
+   		   </if>
+		 <if test="tempvalue != null and  tempvalue!= ''">
+    	   and tempvalue like CONCAT('%', #{tempvalue,jdbcType=VARCHAR}, '%')
+   		   </if>
+ 	  
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TbConf
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insert" parameterType="online.mybatis.model.TbConf">
+    insert into TbConf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      
+        <if test="id != null and  id!= ''">
+        id,
+     	 </if>
+        <if test="name != null and  name!= ''">
+        name,
+     	 </if>
+        <if test="type != null and  type!= ''">
+        type,
+     	 </if>
+        <if test="confvalue != null and  confvalue!= ''">
+        confvalue,
+     	 </if>
+        <if test="oprid != null and  oprid!= ''">
+        oprid,
+     	 </if>
+        <if test="oprtime != null and  oprtime!= ''">
+        oprtime,
+     	 </if>
+        <if test="tempvalue != null and  tempvalue!= ''">
+        tempvalue,
+     	 </if>
+
+  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     	 <if test=" id != null and  id!= ''">
+       #{ id,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" name != null and  name!= ''">
+       #{ name,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" type != null and  type!= ''">
+       #{ type,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" confvalue != null and  confvalue!= ''">
+       #{ confvalue,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" oprid != null and  oprid!= ''">
+       #{ oprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" oprtime != null and  oprtime!= ''">
+       #{ oprtime,jdbcType=VARCHAR},
+      </if>
+     	 <if test=" tempvalue != null and  tempvalue!= ''">
+       #{ tempvalue,jdbcType=VARCHAR},
+      </if>
+      
+     
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="online.mybatis.model.TbConf">
+    update TbConf
+    <set>
+     	 <if test="id != null and  id!= ''">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+     	 <if test="name != null and  name!= ''">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+     	 <if test="type != null and  type!= ''">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+     	 <if test="confvalue != null and  confvalue!= ''">
+        confvalue = #{confvalue,jdbcType=VARCHAR},
+      </if>
+     	 <if test="oprid != null and  oprid!= ''">
+        oprid = #{oprid,jdbcType=VARCHAR},
+      </if>
+     	 <if test="oprtime != null and  oprtime!= ''">
+        oprtime = #{oprtime,jdbcType=VARCHAR},
+      </if>
+     	 <if test="tempvalue != null and  tempvalue!= ''">
+        tempvalue = #{tempvalue,jdbcType=VARCHAR},
+      </if>
+    
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+   <delete id="deleteByTemp" >
+    delete from TbConf
+    where type = 'temp'
+  </delete>
+</mapper>

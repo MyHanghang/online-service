@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="utf-8"/>
+    <title>第二课堂系统</title>
+    <meta name="keywords" content="第二课堂系统"/>
+    <meta name="description" content="第二课堂系统"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <link rel="stylesheet" href="assets/css/huadong.css"/>
+    <script src="assets/js/ace-extra.min.js"></script>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <script src="angular/exam.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular/outlogin.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="baseCtrl">
+<div ng-controller="outloginCtrl">
+    <div ng-include="'stu/head.html'" class="navbar navbar-default"
+         id="navbar"></div>
+</div>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#"> <span
+                class="menu-text"></span>
+        </a>
+        <div ng-include="'stu/menu.html'"></div>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
+            </div>
+            <div class="page-content" style="height: 100px">
+                <div class="page-header">
+                    <strong><h1>个人中心</h1></strong>
+                </div>
+                <div class="alert alert-danger" role="alert" style="width: 74%">
+                    <div style="float: left;">:》</div>
+                    <div id="scroll_div">
+                        <div id="scroll_begin">
+                            <span class="pad_right">欢迎各位同学来到第二课堂学习平台，请大家保持文明发言，如果在使用中出现任何问题请联系平台管理员进行处理，祝学习愉快！&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div id="scroll_end"></div>
+                    </div>
+                </div>
+
+                <div class="notice">
+                    <strong class="text-danger" style="font-size: 14px">TA的动态：</strong>
+                    <div style="margin-left: 20px" class="notice_list" id="notice_list_content">
+                        <ul ng-repeat="y in otherrecord">
+                            <li style="font-size: 16px"><a class="text-success">学号{{y.oprid}}同学于</a>
+                                <a class="text-primary"> 【{{y.oprtime}}】: </a>
+                                <a class="text-danger"> {{y.oprmemo}} </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.page-header -->
+            <div class="row" style="margin-top: 30px">
+                <div class="col-md-6" style="width: 550px;margin-left: 8px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>我的资料</strong></div>
+                        <div class="panel-body">
+                            <strong><p>姓名：</strong> {{users.username}}</p>
+                            <strong><p>学号：</strong> {{users.id}}</p>
+                            <strong><p>职业：</strong> {{users.usertype}}</p>
+                            <strong><p>学院：</strong> {{users.spare3}}</p>
+                            <strong><p>班级：</strong> {{users.usergroup}}</p>
+                            <strong><p>电话：</strong> {{users.userphone}}</p>
+                            <strong><p>宿舍：</strong>{{users.useraddr}}</p>
+                            <strong><p>最后登录： {{users.spare1}}</p></strong>
+                            <hr/>
+                            <button href="#exampleModal" style="margin-left: 220px;"
+                                    role="button"
+                                    class="btn btn-primary" data-toggle="modal">修改密码
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>最近足迹</strong></div>
+                        <div class="panel-body">
+                            <ul ng-repeat="y in recorddata">
+                                <li>
+                                    <strong class="text-success">你于</strong>
+                                    <a class="text-primary"> 【{{y.oprtime}}】: </a>
+                                    <a class="text-danger"> {{y.oprmemo}} </a>
+                                </li>
+                            </ul>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name1" class="control-label">旧密码</label>
+                        <input type="text" class="form-control" placeholder="输入旧密码" id="recipient-name1"
+                               ng-model="conf.oldPass">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name2" class="control-label">新密码</label>
+                        <input type="text" class="form-control" placeholder="输入新密码" id="recipient-name2"
+                               ng-model="conf.userpass">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name3" class="control-label">确认密码</label>
+                        <input type="text" class="form-control" placeholder="再输一次密码" id="recipient-name3"
+                               ng-model="conf.userpass1">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="updateStudentPass()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.main-container-inner -->
+<!-- /.main-container -->
+<!-- basic scripts -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+</script>
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/typeahead-bs2.min.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script type="text/javascript">
+
+
+    var localhost = 'http://' + location.host + "/online-service/";
+    var path = 'user';
+
+    function baseCtrl($scope, $http) {
+
+        $scope.conf = {};
+        $scope.queryStudentInfo = function () {
+            $http({
+                method: "GET",
+                url: localhost + path + "/queryStudentInfo",
+            }).then(function successCallback(response) {
+                $scope.users = response.data.list;
+            }, function errorCallback(response) {
+                // 请求失败执行代码
+                alert("加载失败，请联系管理员")
+            });
+        };
+        $scope.queryStudentInfo();
+
+        $scope.updateStudentPass = function () {
+            var oldPass = $scope.conf.oldPass;
+            var newPass1 = $scope.conf.userpass;
+            var newPass2 = $scope.conf.userpass1;
+            if (!oldPass) {
+                alert("请输入旧密码!!");
+            } else if (newPass1 != newPass2) {
+                alert("两次新密码不同，请重新输入!!");
+            } else {
+                $http({
+                    method: "POST",
+                    url: localhost + path + "/updateStudentPass",
+                    data: JSON.stringify($scope.conf),
+                    dataType: "json",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function successCallback(response) {
+                    var status1 = response.data.status;
+                    if (status1 == "0000") {
+                        alert("修改成功");
+                    } else if (status1 == "4444") {
+                        alert("旧密码不对,请再次确认！！");
+                    } else {
+                        alert("系统异常！！");
+                    }
+                }, function errorCallback(response) {
+                    // 请求失败执行代码
+                    alert("修改失败！" + response);
+                });
+            }
+        };
+        $scope.queryMyRecord = function () {
+            $http({
+                method: "POST",
+                url: localhost + "/Tbrecord/queryMyRecord",
+            }).then(function successCallback(response) {
+                $scope.recorddata = response.data.records;
+            }, function errorCallback(response) {
+                $scope.message = "系统异常"
+            });
+        };
+        $scope.queryMyRecord();
+
+        $scope.queryOtherRecord = function () {
+            $http({
+                method: "POST",
+                url: localhost + "/Tbrecord/queryOtherRecord",
+            }).then(function successCallback(response) {
+                $scope.otherrecord = response.data.records;
+            }, function errorCallback(response) {
+                $scope.message = "系统异常"
+            });
+        };
+        $scope.queryOtherRecord();
+    }
+</script>
+<script type="text/javascript">
+    //文字横向滚动
+    function ScrollImgLeft() {
+        var speed = 30;//初始化速度 也就是字体的整体滚动速度
+        var MyMar = null;//初始化一个变量为空 用来存放获取到的文本内容
+        var scroll_begin = document.getElementById("scroll_begin");//获取滚动的开头id
+        var scroll_end = document.getElementById("scroll_end");//获取滚动的结束id
+        var scroll_div = document.getElementById("scroll_div");//获取整体的开头id
+        scroll_end.innerHTML = scroll_begin.innerHTML;//滚动的是html内部的内容,原生知识!
+//定义一个方法
+        function Marquee() {
+            if (scroll_end.offsetWidth - scroll_div.scrollLeft <= 0)
+                scroll_div.scrollLeft -= scroll_begin.offsetWidth;
+            else
+                scroll_div.scrollLeft++;
+        }
+
+        MyMar = setInterval(Marquee, speed);//给上面的方法设置时间  setInterval
+//鼠标点击这条公告栏的时候,清除上面的方法,让公告栏暂停
+        scroll_div.onmouseover = function () {
+            clearInterval(MyMar);
+        };
+//鼠标点击其他地方的时候,公告栏继续运动
+        scroll_div.onmouseout = function () {
+            MyMar = setInterval(Marquee, speed);
+        }
+    }
+
+    ScrollImgLeft();
+</script>
+<script type="text/javascript">
+    var area = document.getElementById('notice_list_content');
+    area.innerHTML += area.innerHTML;
+    area.scrollTop = 0;
+    var timer;
+
+    function startMove() {
+        timer = setInterval(scrollUp, 60);
+        area.scrollTop++;
+    }
+
+    function scrollUp() {
+        if (area.scrollTop % 33 === 0) {
+            clearInterval(timer);
+            setTimeout(startMove, 0);
+        }
+        else {
+            area.scrollTop++;
+
+            if (area.scrollTop >= area.scrollHeight / 2) {
+                area.scrollTop = 0;
+            }
+        }
+    }
+
+    setTimeout(startMove, 0);
+    try {
+        ace.settings.check('breadcrumbs', 'fixed')
+    } catch (e) {
+    }
+</script>
+<script src="assets/js/filterrolestudent.js"></script>
+</body>
+</html>

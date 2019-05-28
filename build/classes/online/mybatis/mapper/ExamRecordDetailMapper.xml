@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="online.mybatis.mapper.ExamRecordDetailMapper">
+    <resultMap id="BaseResultMap" type="online.mybatis.model.ExamRecordDetail">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="recordId" property="recordid" jdbcType="VARCHAR"/>
+        <result column="titile" property="titile" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="point" property="point" jdbcType="INTEGER"/>
+        <result column="myAnswer" property="myanswer" jdbcType="VARCHAR"/>
+        <result column="myPoint" property="mypoint" jdbcType="INTEGER"/>
+        <result column="memo" property="memo" jdbcType="VARCHAR"/>
+        <result column="spare1" property="spare1" jdbcType="VARCHAR"/>
+        <result column="spare2" property="spare2" jdbcType="VARCHAR"/>
+        <result column="spare3" property="spare3" jdbcType="VARCHAR"/>
+        <result column="spare4" property="spare4" jdbcType="VARCHAR"/>
+        <result column="spare5" property="spare5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, recordId, titile, answer, point, myAnswer, myPoint, memo, spare1, spare2, spare3, 
+    spare4, spare5
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="online.mybatis.model.ExamRecordDetailExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from exam_recorddetail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from exam_recorddetail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from exam_recorddetail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="online.mybatis.model.ExamRecordDetailExample">
+        delete from exam_recorddetail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="online.mybatis.model.ExamRecordDetail">
+    insert into exam_recorddetail (id, recordId, titile, 
+      answer, point, myAnswer, 
+      myPoint, memo, spare1, 
+      spare2, spare3, spare4, 
+      spare5)
+    values (#{id,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR}, #{titile,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER}, #{myanswer,jdbcType=VARCHAR}, 
+      #{mypoint,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, #{spare1,jdbcType=VARCHAR}, 
+      #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, 
+      #{spare5,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="online.mybatis.model.ExamRecordDetail">
+        insert into exam_recorddetail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="recordid != null">
+                recordId,
+            </if>
+            <if test="titile != null">
+                titile,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="point != null">
+                point,
+            </if>
+            <if test="myanswer != null">
+                myAnswer,
+            </if>
+            <if test="mypoint != null">
+                myPoint,
+            </if>
+            <if test="memo != null">
+                memo,
+            </if>
+            <if test="spare1 != null">
+                spare1,
+            </if>
+            <if test="spare2 != null">
+                spare2,
+            </if>
+            <if test="spare3 != null">
+                spare3,
+            </if>
+            <if test="spare4 != null">
+                spare4,
+            </if>
+            <if test="spare5 != null">
+                spare5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="recordid != null">
+                #{recordid,jdbcType=VARCHAR},
+            </if>
+            <if test="titile != null">
+                #{titile,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="point != null">
+                #{point,jdbcType=INTEGER},
+            </if>
+            <if test="myanswer != null">
+                #{myanswer,jdbcType=VARCHAR},
+            </if>
+            <if test="mypoint != null">
+                #{mypoint,jdbcType=INTEGER},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="spare1 != null">
+                #{spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="spare2 != null">
+                #{spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="spare3 != null">
+                #{spare3,jdbcType=VARCHAR},
+            </if>
+            <if test="spare4 != null">
+                #{spare4,jdbcType=VARCHAR},
+            </if>
+            <if test="spare5 != null">
+                #{spare5,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="online.mybatis.model.ExamRecordDetailExample"
+            resultType="java.lang.Integer">
+        select count(*) from exam_recorddetail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectAnswerByRecordid" resultType="java.lang.String">
+    SELECT answer FROM exam_recorddetail WHERE id = #{id,jdbcType=VARCHAR};
+  </select>
+    <select id="selectMyAnswerByRecordid" resultType="java.lang.String">
+         SELECT myAnswer FROM exam_recorddetail WHERE id = #{id,jdbcType=VARCHAR};
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update exam_recorddetail
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordid != null">
+                recordId = #{record.recordid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.titile != null">
+                titile = #{record.titile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.answer != null">
+                answer = #{record.answer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.point != null">
+                point = #{record.point,jdbcType=INTEGER},
+            </if>
+            <if test="record.myanswer != null">
+                myAnswer = #{record.myanswer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mypoint != null">
+                myPoint = #{record.mypoint,jdbcType=INTEGER},
+            </if>
+            <if test="record.memo != null">
+                memo = #{record.memo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare1 != null">
+                spare1 = #{record.spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare2 != null">
+                spare2 = #{record.spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare3 != null">
+                spare3 = #{record.spare3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare4 != null">
+                spare4 = #{record.spare4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare5 != null">
+                spare5 = #{record.spare5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update exam_recorddetail
+        set id = #{record.id,jdbcType=VARCHAR},
+        recordId = #{record.recordid,jdbcType=VARCHAR},
+        titile = #{record.titile,jdbcType=VARCHAR},
+        answer = #{record.answer,jdbcType=VARCHAR},
+        point = #{record.point,jdbcType=INTEGER},
+        myAnswer = #{record.myanswer,jdbcType=VARCHAR},
+        myPoint = #{record.mypoint,jdbcType=INTEGER},
+        memo = #{record.memo,jdbcType=VARCHAR},
+        spare1 = #{record.spare1,jdbcType=VARCHAR},
+        spare2 = #{record.spare2,jdbcType=VARCHAR},
+        spare3 = #{record.spare3,jdbcType=VARCHAR},
+        spare4 = #{record.spare4,jdbcType=VARCHAR},
+        spare5 = #{record.spare5,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="online.mybatis.model.ExamRecordDetail">
+        update exam_recorddetail
+        <set>
+            <if test="recordid != null">
+                recordId = #{recordid,jdbcType=VARCHAR},
+            </if>
+            <if test="titile != null">
+                titile = #{titile,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="point != null">
+                point = #{point,jdbcType=INTEGER},
+            </if>
+            <if test="myanswer != null">
+                myAnswer = #{myanswer,jdbcType=VARCHAR},
+            </if>
+            <if test="mypoint != null">
+                myPoint = #{mypoint,jdbcType=INTEGER},
+            </if>
+            <if test="memo != null">
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="spare1 != null">
+                spare1 = #{spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="spare2 != null">
+                spare2 = #{spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="spare3 != null">
+                spare3 = #{spare3,jdbcType=VARCHAR},
+            </if>
+            <if test="spare4 != null">
+                spare4 = #{spare4,jdbcType=VARCHAR},
+            </if>
+            <if test="spare5 != null">
+                spare5 = #{spare5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="online.mybatis.model.ExamRecordDetail">
+    update exam_recorddetail
+    set recordId = #{recordid,jdbcType=VARCHAR},
+      titile = #{titile,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      point = #{point,jdbcType=INTEGER},
+      myAnswer = #{myanswer,jdbcType=VARCHAR},
+      myPoint = #{mypoint,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=VARCHAR},
+      spare1 = #{spare1,jdbcType=VARCHAR},
+      spare2 = #{spare2,jdbcType=VARCHAR},
+      spare3 = #{spare3,jdbcType=VARCHAR},
+      spare4 = #{spare4,jdbcType=VARCHAR},
+      spare5 = #{spare5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
